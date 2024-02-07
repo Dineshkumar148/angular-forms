@@ -16,15 +16,20 @@ import { RouterLink, RouterModule } from '@angular/router';
 })
 export class TemplateDrivenFormsComponent {
   templateform = {
-    name: 'dines',
+    name: '',
+    email: '',
+    phone: '',
+    address: [{ street: '' }],
+    password: '',
+    passwordviewhide: '',
+
+
   }
 
-  // clientsubmit() {
-  //   if (this.templateform.invalid) {
-  //     console.log(this.templateform.errors);
-  //     window.alert('enter correct values')
-  //   }
-  //   console.log(this.templateform.valid);
-  //   console.log(this.templateform.value);
-  // }
+  adressbutton() {
+    this.templateform.address.push({ street: '' })
+  }
+  removebutton(index: any) {
+    this.templateform.address.splice(index, 1);
+  }
 }

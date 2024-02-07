@@ -1,8 +1,9 @@
 <div>
-    <form  class="client-form" >
+    <form class="client-form">
         <h1 class="app-heading">Create Client using template driven forms</h1>
         <div>
-            <input #namecontrol="ngModel" [(ngModel)]="templateform.name" type="text" name="clientname" placeholder="Enter Client Name" required>
+            <input #namecontrol="ngModel" [(ngModel)]="templateform.name" type="text" name="name"
+                placeholder="Enter Client Name" required>
         </div>
         <div *ngIf="namecontrol.touched">
             <span *ngIf="namecontrol.errors?.['required']" class="client-form-error-message">
@@ -10,74 +11,69 @@
             </span>
         </div>
         <div>
-            <input type="text" name="clientname" placeholder="Enter Email">
+            <input #emailcontrol="ngModel" [(ngModel)]="templateform.email" type="email" name="email"
+                placeholder="Enter Email" required>
 
 
-            <!-- <div *ngIf="clientcreateform.controls.clientemail.touched">
-                <span *ngIf="clientcreateform.controls.clientemail.errors?.['required']"
-                    class="client-form-error-message">
+            <div *ngIf="emailcontrol.touched">
+                <span *ngIf="emailcontrol.errors?.['required']" class="client-form-error-message">
                     please enter email.
                 </span>
-                <span *ngIf="clientcreateform.controls.clientemail.errors?.['email']" class="client-form-error-message">
+                <span *ngIf="emailcontrol.errors?.['type']" class="client-form-error-message">
                     please enter valid email.
                 </span>
-            </div> -->
+            </div>
         </div>
         <div>
-            <input  type="tel" name="clientname" placeholder="Enter phone Number">
-            <!-- <div *ngIf="clientcreateform.controls.phonenumber.touched">
-                <span *ngIf="clientcreateform.controls.phonenumber.errors?.['required']"
-                    class="client-form-error-message">
+            <input #phonecontrol="ngModel" [(ngModel)]="templateform.phone" type="tel" name="phone"
+                placeholder="Enter phone Number" minlength="10" maxlength="10" pattern="[0-9]+" required>
+            <div *ngIf="phonecontrol.touched">
+                <span *ngIf="phonecontrol.errors?.['required']" class="client-form-error-message">
                     please enter Phone Number.
                 </span>
-                <span *ngIf="clientcreateform.controls.phonenumber.errors?.['pattern']"
-                    class="client-form-error-message">
+                <span *ngIf="phonecontrol.errors?.['pattern']" class="client-form-error-message">
                     please enter numbers only.
                 </span>
-                <span *ngIf="clientcreateform.controls.phonenumber.errors?.['minlength']"
-                    class="client-form-error-message">
-                    enter 10 character.
+                <span *ngIf="phonecontrol.errors?.['minlength']" class="client-form-error-message">
+                    please enter 10 number.
                 </span>
-                <span *ngIf="clientcreateform.controls.phonenumber.errors?.['maxlength']"
-                    class="client-form-error-message">
-                    enter 10 character only.
-                </span>
-            </div> -->
+            </div>
 
         </div>
         <div>
-            <!-- <input formControlName="password" type="password" name="clientname" placeholder="Enter Password" [type]="clientcreateform.controls.passwordviewhide.value ==='show' ?'text' : 'password'">
-            <div class="client-view-hide">
-                <label>view password</label>
-                <input type="radio" value="show" formControlName="passwordviewhide">
-                <label>hide password</label>
-                <input type="radio" value="hide" formControlName="passwordviewhide">
-            </div> -->
-            <!-- <div *ngIf="clientcreateform.controls.password.touched">
-                <span *ngIf="clientcreateform.controls.password.errors?.['required']" class="client-form-error-message">
+            <input #passwordControl="ngModel" [(ngModel)]="templateform.password" type="password" name="password"
+                placeholder="Enter Password" [type]="passwordControl.value ==='show' ?'text' : 'password'" minlength="6" pattern="[0-9,A-Z]*" required>
+                
+            <div *ngIf="passwordControl.touched">
+                <span *ngIf="passwordControl.errors?.['required']" class="client-form-error-message">
                     please enter password.
                 </span>
-                <span *ngIf="clientcreateform.controls.password.errors?.['minlength']"
-                    class="client-form-error-message">
+                <span *ngIf="passwordControl.errors?.['minlength']" class="client-form-error-message">
                     password should contain atleast 6 character.
                 </span>
-                <span *ngIf="clientcreateform.controls.password.errors?.['pattern']" class="client-form-error-message">
+                <span *ngIf="passwordControl.errors?.['pattern']" class="client-form-error-message">
                     password should contain uppercase and number only.
-                </span> 
-            </div> -->
+                </span>
+            </div>
+
+            <div class="passwordviewhide">
+                <label>view password</label>
+                <input type="radio" value="show">
+                <label>hide password</label>
+                <input type="radio" value="hide">
+            </div>
         </div>
-        <div formArrayName="adress">
-            <!-- <div class="client-address-container" *ngFor="let x of getAdressFormArray().controls; index as i">
-                <input [formControlName]="i" type="text" placeholder="Adress">
-                <button type="button" class="add-button" (click)="adressAddControl()">Add</button>
-                <button type="button" class="remove-button" (click)="adressRemoveControl(i)">Remove</button>
-            </div> -->
+        <div formArrayName="adress" *ngFor="let x of templateform.address index as i">
+            <div class="client-address-container">
+                <input [(ngModel)]="templateform.address[i].street" type="text" [name]="'address'+i"
+                    placeholder="Address">
+                <button type="button" class="add-button" (click)="adressbutton()">Add</button>
+                <button type="button" class="remove-button" (click)="removebutton(i)">Remove</button>
+            </div>
+
         </div>
         <div>
             <button>submit</button>
         </div>
-      <div>
-        {{templateform.name | json}}
-      </div>
     </form>
 </div>
