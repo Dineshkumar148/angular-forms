@@ -1,0 +1,81 @@
+<div>
+    <form [formGroup]="clientcreateform" class="client-form" (ngSubmit)="clientsubmit()">
+        <h1 class="app-heading">Create Client using reactive forms</h1>
+        <div>
+            <input formControlName="clientname" type="text" name="clientname" placeholder="Enter Client Name">
+        </div>
+        <div *ngIf="clientcreateform.controls.clientname.touched">
+            <span *ngIf="clientcreateform.controls.clientname.errors?.['required']" class="client-form-error-message">
+                please enter name.
+            </span>
+        </div>
+        <div>
+            <input formControlName="clientemail" type="text" name="clientname" placeholder="Enter Email">
+
+
+            <div *ngIf="clientcreateform.controls.clientemail.touched">
+                <span *ngIf="clientcreateform.controls.clientemail.errors?.['required']"
+                    class="client-form-error-message">
+                    please enter email.
+                </span>
+                <span *ngIf="clientcreateform.controls.clientemail.errors?.['email']" class="client-form-error-message">
+                    please enter valid email.
+                </span>
+            </div>
+        </div>
+        <div>
+            <input formControlName="phonenumber" type="tel" name="clientname" placeholder="Enter phone Number">
+            <div *ngIf="clientcreateform.controls.phonenumber.touched">
+                <span *ngIf="clientcreateform.controls.phonenumber.errors?.['required']"
+                    class="client-form-error-message">
+                    please enter Phone Number.
+                </span>
+                <span *ngIf="clientcreateform.controls.phonenumber.errors?.['pattern']"
+                    class="client-form-error-message">
+                    please enter numbers only.
+                </span>
+                <span *ngIf="clientcreateform.controls.phonenumber.errors?.['minlength']"
+                    class="client-form-error-message">
+                    enter 10 character.
+                </span>
+                <span *ngIf="clientcreateform.controls.phonenumber.errors?.['maxlength']"
+                    class="client-form-error-message">
+                    enter 10 character only.
+                </span>
+            </div>
+
+        </div>
+        <div>
+            <input formControlName="password" type="password" name="clientname" placeholder="Enter Password" [type]="clientcreateform.controls.passwordviewhide.value ==='show' ?'text' : 'password'">
+            <div class="client-view-hide">
+                <label>view password</label>
+                <input type="radio" value="show" formControlName="passwordviewhide">
+                <label>hide password</label>
+                <input type="radio" value="hide" formControlName="passwordviewhide">
+            </div>
+            <div *ngIf="clientcreateform.controls.password.touched">
+                <span *ngIf="clientcreateform.controls.password.errors?.['required']" class="client-form-error-message">
+                    please enter password.
+                </span>
+                <span *ngIf="clientcreateform.controls.password.errors?.['minlength']"
+                    class="client-form-error-message">
+                    password should contain atleast 6 character.
+                </span>
+                <span *ngIf="clientcreateform.controls.password.errors?.['pattern']" class="client-form-error-message">
+                    password should contain uppercase and number only.
+                </span> 
+            </div>
+        </div>
+        <div formArrayName="adress">
+            <div class="client-address-container" *ngFor="let x of getAdressFormArray().controls; index as i">
+                <input [formControlName]="i" type="text" placeholder="Adress">
+                <button type="button" class="add-button" (click)="adressAddControl()">Add</button>
+                <button type="button" class="remove-button" (click)="adressRemoveControl(i)">Remove</button>
+            </div>
+        </div>
+        <div>
+            <button [disabled]="clientcreateform.invalid">submit</button>
+        </div>
+      
+    </form>
+</div>

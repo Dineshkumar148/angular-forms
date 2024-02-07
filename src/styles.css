@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+    box-sizing: border-box;
+  
+}
+.active {
+    background-color: #FF5D25;
+    color: #FFFF;
+    padding: 10px;
+    border-radius: 4px;
+}
+a{
+    border:solid 1px black;
+    padding: 10px;
+    text-decoration: none;
+}

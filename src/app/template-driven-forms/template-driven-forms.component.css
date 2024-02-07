@@ -1,0 +1,44 @@
+.client-form{
+    padding-left: 400px;
+   
+}
+.client-form div {
+    margin-bottom: 10px;
+}
+
+.client-form input:not([type=radio]),
+button{
+    width: 250px;
+    height: 40px;
+    padding: 10px;
+}
+
+.client-form-error-message{
+    color:red;
+}
+.client-address-container{
+    display: flex;
+    align-items: center;
+}
+.add-button{
+    display: flex;
+    align-items: center;
+    background-color: #FF5D25;
+    color: #fff;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-left: 5px;
+    height: 40px;
+    width: 50px;
+}
+.remove-button{
+    display: flex;
+    align-items: center;
+    background-color: red;
+    color: #fff;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-left: 5px;
+    height: 40px;
+    width: 80px;
+}
